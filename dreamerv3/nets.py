@@ -92,6 +92,12 @@ class RSSM(nj.Module):
         lambda x, y: x + self._mask(y, is_first),
         prev_state, self.initial(len(is_first)))
     prior = self.img_step(prev_state, prev_action)
+    # print('prior', prior['deter'])
+    # print('embed', embed)
+    # print('shapes', prior['deter'].shape, embed.shape)
+    # if prior['deter'].shape != embed.shape:
+    #   embed = embed[0]
+    # print('aftshapes', prior['deter'].shape, embed.shape)
     x = jnp.concatenate([prior['deter'], embed], -1)
     x = self.get('obs_out', Linear, **self._kw)(x)
     stats = self._stats('obs_stats', x)
