@@ -53,7 +53,6 @@ class Agent(nj.Module):
     obs = self.preprocess(obs)
     (prev_latent, prev_action), task_state, expl_state = state
     embed = self.wm.encoder(obs)
-    print('prev_latent', prev_latent, 'prev_action', prev_action, 'embed', embed, 'obs', obs['is_first'])
     latent, _ = self.wm.rssm.obs_step(
         prev_latent, prev_action, embed, obs['is_first'])
     self.expl_behavior.policy(latent, expl_state)

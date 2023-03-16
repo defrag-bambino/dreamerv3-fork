@@ -58,8 +58,7 @@ class FromGym(embodied.Env):
       action = self._unflatten(action)
     else:
       action = action[self._act_key]
-    obs, reward, self._done, self._info = self._env.step([action])
-    self._info = self._info[0]
+    obs, reward, self._done, self._info = self._env.step(action)
     return self._obs(
         obs, reward,
         is_last=bool(self._done),
